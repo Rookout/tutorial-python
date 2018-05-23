@@ -40,8 +40,8 @@ def del_todo(todoId):
 
 @app.route('/todos/clear_completed', methods=['DELETE'])
 def clear_completed():
-    #global todos
-    todos = [t for t in todos if not t['completed']]
+    global todos
+    todo = [t for t in todos if not t['completed']]
     return ('', 204)
 
 
