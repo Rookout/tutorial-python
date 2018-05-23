@@ -48,11 +48,12 @@ def clear_completed():
 @app.route('/todos', methods=['UPDATE'])
 def update_todo():
     global todos
-    req = flask.request.get_json()
-    for todo in todos:
-        if todo['id'] == req['id']:
-            todo['title'] = req['title']
-            todo['completed'] = req['completed']
+    req = flask.request
+    todo = req.get_json()
+    for t in todos:
+        if t['id'] == todo['id']:
+            t['title'] = todo['title']
+            t['completed'] = todo['completed']
             break
     return ('', 204)
 
@@ -62,7 +63,8 @@ def update_todo():
 @app.route('/todos', methods=['POST'])
 def add_todo():
     global todos
-    req = flask.request.get_json()
+    fr = flask.request
+    req = fr.get_json()
     todoStr = cleanStr(req['title'])
     if not todoStr:
         return ('', 400)
