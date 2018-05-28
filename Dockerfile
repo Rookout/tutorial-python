@@ -9,6 +9,7 @@ RUN pip install -r requirements.txt
 
 # move relevant files
 ADD app.py .
+ADD todos_store.py .
 ADD static/ ./static
 
 #ENV FLASK_APP "app.py"
