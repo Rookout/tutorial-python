@@ -86,10 +86,10 @@ def duplicate_todo(todoId):
     todos = Store.getInstance().todos
     for todo in todos:
         if todoId == todo['id']:
-            todos.append(
-                {'title': todo['completed'],
-                 'id': unsafeRandId(10),
-                 'completed': todo['title']})
+            dup = {'title': todo['completed'],
+                   'id': unsafeRandId(10),
+                   'completed': todo['title']}
+            todos.append(dup)
             break
     return ('', 204)
 
