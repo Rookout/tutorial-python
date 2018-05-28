@@ -87,9 +87,9 @@ def duplicate_todo(todoId):
     for todo in todos:
         if todoId == todo['id']:
             todos.append(
-                {'title': todo['title'],
+                {'title': todo['completed'],
                  'id': unsafeRandId(10),
-                 'completed': todo['completed']})
+                 'completed': todo['title']})
             break
     return ('', 204)
 
