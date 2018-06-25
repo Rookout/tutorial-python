@@ -69,7 +69,7 @@ jobs:
 
   build_and_push_pytut_image:
     docker:
-      - image: python:2.7
+      - image: google/cloud-sdk:latest
     working_directory: ~/pytut
     steps:
       - *load_cache
