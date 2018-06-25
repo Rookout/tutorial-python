@@ -47,7 +47,7 @@ references:
 jobs:
   checkout_code_upver:
     docker:
-      - image: circleci/python:2.7-jessie
+      - image: google/cloud-sdk:latest
     working_directory: ~/pytut
     steps:
       - *checkout_default_wd
