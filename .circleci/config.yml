@@ -53,8 +53,8 @@ jobs:
       - add_ssh_keys
       - run:
           command: |
-            mkdir -p /root/pytut/workspace
-            python -m rookout_build_tools.versioning.versions > /root/pytut/workspace/VERSION
+            mkdir -p ~/pytut/workspace
+            rbt version get-next > ~/pytut/workspace/VERSION
       - save_cache:
           key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
           paths:
