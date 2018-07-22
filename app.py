@@ -1,4 +1,3 @@
-from rook import auto_start
 import flask
 import re
 import os
@@ -93,6 +92,8 @@ def duplicate_todo(todoId):
             break
     return ('', 204)
 
+
+from rook import auto_start
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0')
