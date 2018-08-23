@@ -89,7 +89,7 @@ jobs:
   deploy_demo:
     docker:
       - image: google/cloud-sdk:latest
-    working_directory: ~/demo
+    working_directory: ~/pytut
     steps:
       - add_ssh_keys
       - *disable_strict_git
@@ -105,7 +105,7 @@ jobs:
   test_demo_servers_up:
     docker:
         - image: google/cloud-sdk:latest
-    working_directory: ~/demo
+    working_directory: ~/pytut
     steps:
       - run: sleep 15 && echo "Checking Staging..."
       - run: curl 'http://staging.machina.rookout-demo.com/account/register'
