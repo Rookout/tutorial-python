@@ -17,7 +17,7 @@ references:
 
   checkout_default_wd: &checkout_default_wd
     checkout:
-      path: ~/pytut
+      path: ~/demo
 
   load_cache: &load_cache
     restore_cache:
@@ -25,11 +25,11 @@ references:
         - v1-repo-{{ .Environment.CIRCLE_SHA1 }}
 
   load_version: &load_version
-    run: cat ~/pytut/workspace/VERSION >> $BASH_ENV
+    run: cat ~/demo/workspace/VERSION >> $BASH_ENV
 
   setup_workspace: &setup_workspace
     attach_workspace:
-      at: ~/pytut
+      at: ~/demo
 
   setup_docker_layer_caching: &setup_docker_layer_caching
     setup_remote_docker:
@@ -54,7 +54,7 @@ jobs:
   checkout_code_upver:
     docker:
       - image: python:2.7
-    working_directory: ~/pytut
+    working_directory: ~/demo
     steps:
       - *checkout_default_wd
       - *setup_workspace
@@ -62,21 +62,21 @@ jobs:
       - add_ssh_keys
       - run:
           command: |
-            mkdir -p ~/pytut/workspace
-            rbt version get-next > ~/pytut/workspace/VERSION
+            mkdir -p ~/demo/workspace
+            rbt version get-next > ~/demo/workspace/VERSION
       - save_cache:
           key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
           paths:
-            - ~/pytut
+            - ~/demo
       - persist_to_workspace:
           root: .
           paths:
             - workspace/VERSION
 
-  build_and_push_pytut_image:
+  build_and_push_demo_image:
     docker:
       - image: google/cloud-sdk:latest
-    working_directory: ~/pytut
+    working_directory: ~/demo
     steps:
       - *load_cache
       - *setup_workspace
@@ -89,7 +89,7 @@ jobs:
   deploy_demo:
     docker:
       - image: google/cloud-sdk:latest
-    working_directory: ~/pytut
+    working_directory: ~/demo
     steps:
       - add_ssh_keys
       - *disable_strict_git
@@ -105,7 +105,7 @@ jobs:
   test_demo_servers_up:
     docker:
         - image: google/cloud-sdk:latest
-    working_directory: ~/pytut
+    working_directory: ~/demo
     steps:
       - run: sleep 15 && echo "Checking Staging..."
       - run: curl 'http://staging.machina.rookout-demo.com/account/register'
@@ -123,13 +123,13 @@ workflows:
   deploy-pipeline:
     jobs:
       - checkout_code_upver
-      - build_and_push_pytut_image:
+      - build_and_push_demo_image:
           requires:
             - checkout_code_upver
           <<: *filter_master
       - deploy_demo:
           requires:
-            - build_and_push_pytut_image
+            - build_and_push_demo_image
           <<: *filter_master
       - test_demo_servers_up:
           requires:
