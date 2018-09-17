@@ -4,6 +4,8 @@ import os
 import string
 import random
 import json
+from datetime import datetime
+from random import randint
 from todos_store import Store
 
 app = flask.Flask(__name__, static_url_path='/static')
