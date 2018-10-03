@@ -8,6 +8,7 @@ from datetime import datetime
 from random import randint
 from todos_store import Store
 
+from rook import auto_start
 app = flask.Flask(__name__, static_url_path='/static')
 
 # unsafeRandId generates a random string composed from english upper case letters and digits
@@ -115,8 +116,6 @@ def duplicate_todo(todoId):
             break
     return ('', 204)
 
-
-from rook import auto_start
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0')
