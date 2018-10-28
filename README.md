@@ -1,50 +1,50 @@
-# Rookout official tutorial for using Python
+# Rookout tutorial for debugging Python applications
 
 [![CircleCI](https://circleci.com/gh/Rookout/tutorial-python/tree/master.svg?style=svg)](https://circleci.com/gh/Rookout/python/tree/master)
 [![License][license-image]][license-url]
 [![Docs][docs-image]][docs-url]
 [![GitHub version][version-badge]](https://badge.fury.io/gh/rookout%2Ftutorial-python)
 
-This is the official [rookout][rookout-getting-started] Python tutorial
+A sample app for debugging Python using [Rookout][rookout-getting-started].
 
-- [Signup][rookout-signup]
-- [Documentation][docs-url]
+## Helpful links:
+
 - [Prerequisites](#prerequisites)
-- [Installation](#installation)
+- [Setup](#setup)
 - [Usage](#usage)
 - [License](#license)
+- [Sign up to Rookout][rookout-signup]
+- [Online Documentation][docs-url]
 
 
 ## Prerequisites
 
 1. Python 2.7.14 or newer
-1. Optional - Docker - https://www.docker.com/get-docker
+2. Optional - Docker - https://www.docker.com/get-docker
 
-## Installation
+## Setup
 
-1. Clone this repo
+3. Clone the sample app from this repository:
 
 ```bash
 git clone https://github.com/Rookout/tutorial-python.git
 cd tutorial-python
 ``` 
 
-1. Set your Rookout token in an ENV variable (replace **export** by **set** if on Windows)
+4. Set your Rookout token as an environment variable (for Windows, use ***set*** instead of **export**)
 
 ```bash
 export ROOKOUT_TOKEN=[Your Rookout Token]
 ```
      
-1. Run the app
-
-- Option 1 - Without Docker:
+5. Run the app:
 
 ```bash
 pip install -r requirements.txt
 python app.py
 ```
 
-- Option 2 - Running with docker
+- Optional - Run the app using Docker:
 
 ```bash
 docker build . -t tutorial-python
@@ -53,7 +53,7 @@ docker run -p 5000:5000 -e ROOKOUT_TOKEN=$ROOKOUT_TOKEN tutorial-python
 
 ## Usage
 
-- After running the app go to [https://app.rookout.com/][rookout-app-url] and **Log In**
+- Log in to [the Rookout IDE][rookout-app-url].
 - Add the source code according to the instructions using the left pane **Source View**
 
     <details>
