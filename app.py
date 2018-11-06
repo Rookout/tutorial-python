@@ -116,6 +116,9 @@ def duplicate_todo(todoId):
     return ('', 204)
 
 
-from rook import auto_start
+from rook.interface import Rook
+r = Rook()
+r.start(token=os.environ.get('ROOKOUT_TOKEN'))
+
 if __name__ == "__main__":
     app.run(host='0.0.0.0')
