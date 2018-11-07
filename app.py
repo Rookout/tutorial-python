@@ -1,6 +1,5 @@
 import flask
 import re
-import os
 import string
 import random
 import json
@@ -118,7 +117,7 @@ def duplicate_todo(todoId):
 
 from rook.interface import Rook
 r = Rook()
-r.start(token=os.environ.get('ROOKOUT_TOKEN'))
+r.start()
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0')
