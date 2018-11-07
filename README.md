@@ -48,8 +48,7 @@ python app.py
 - Optional - Run the app using Docker:
 
 ```bash
-docker build . -t tutorial-python
-docker run -p 5000:5000 -e ROOKOUT_TOKEN=$ROOKOUT_TOKEN tutorial-python
+docker run -p 5000:5000 -e ROOKOUT_TOKEN=$ROOKOUT_TOKEN rookout/tutorial-python
 ```
 
 ## Usage
