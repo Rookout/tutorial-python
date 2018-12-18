@@ -3,6 +3,6 @@ regressionTest {
     LINE_NUM =  "102" 
     SHA =  "2e0108e028ddd7f9e550cab3d3bb76068f05b997a6a1c5d959ccb388ebff9e88"
     LANG = "Python"
-    BACKGROUND_IMAGE_CMD = "python app.py &"
+    BACKGROUND_IMAGE_CMD = "python /app.py &"
     URL_FOR_TRIGGER = "http://localhost:5000/todos"
 }
