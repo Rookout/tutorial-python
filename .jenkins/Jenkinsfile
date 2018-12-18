@@ -10,7 +10,7 @@ podCreator.initMain(label: label) {
             stage ('Getting test') {
             def myRepo = checkout scm
             env.GIT_BRANCH = myRepo.GIT_BRANCH.replaceAll('/|_', '-')
-            if ("add-regression-test".equals(env.GIT_BRANCH)) {
+            if ("master".equals(env.GIT_BRANCH)) {
                 def scriptToUse = libraryResource 'generate_tests.groovy'
                 def jobName = "tutorial-python"
                 def dockerTag = TestUtilities.getDockerTagNameForRegression(jobName)
