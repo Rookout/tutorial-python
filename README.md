@@ -81,7 +81,7 @@ docker run -p 5000:5000 -e ROOKOUT_TOKEN=$ROOKOUT_TOKEN rookout/tutorial-python
     
     
 - Open the file `app.py`
-- Add a Dumpframe rule next to line number 74 by clicking next the the line number in the file viewer
+- Add a Snapshot rule next to line number 74 by clicking next the the line number in the file viewer
 - Looking at the right-hand pane **Rules**, you will see the rule you added, on what line you added it and it should be GREEN, meaning everything is communicating correctly.
     - If this is not the case, [click here](#rules-common-issues) to see how to fix that
 - Go the the app webpage http://localhost:5000/ and add a todo in order to trigger the rule
