@@ -81,18 +81,18 @@ docker run -p 5000:5000 -e ROOKOUT_TOKEN=$ROOKOUT_TOKEN rookout/tutorial-python
     
     
 - Open the file `app.py`
-- Add a Snapshot rule next to line number 74 by clicking next the the line number in the file viewer
-- Looking at the right-hand pane **Rules**, you will see the rule you added, on what line you added it and it should be GREEN, meaning everything is communicating correctly.
-    - If this is not the case, [click here](#rules-common-issues) to see how to fix that
-- Go the the app webpage http://localhost:5000/ and add a todo in order to trigger the rule
+- Add a Snapshot Breakpoint next to line number 74 by clicking next the the line number in the file viewer
+- Looking at the right-hand pane **Breakpoints**, you will see the Breakpoint you added, on what line you added it and it should be GREEN, meaning everything is communicating correctly.
+    - If this is not the case, [click here](breakpoints-status.md) to see how to fix that
+- Go the the app webpage http://localhost:5000/ and add a todo in order to trigger the Breakpoint
 - Check the bottom pane **Messages** and you'll see the dumpframe you just added, as it was triggered by the handler of the web api when you added a todo
 
 Go through the [bug list](https://docs.rookout.com/docs/python-getting-started.html#bug-hunt) and follow instructions to see some basic use cases.
 
-## Rules Common Issues
+## Common Pitfalls
 
-- Rule status is RED -- Hash mismatch. It means the file used in the server is not the same file used from github/local server in app.rookout.com
-- Rule status is GRAY -- No rook connected. Make sure you have inserted the token in the right place and that connection is made properly.
+- Breakpoint status is RED -- Hash mismatch. It means the file used in the server is not the same file used from github/local server in app.rookout.com
+- Breakpoint status is GRAY -- No app connected. Make sure you have inserted the Rookout Token in the right place and that connection is made properly.
 
 ## Want to learn more ?
 
