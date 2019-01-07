@@ -87,7 +87,7 @@ docker run -p 5000:5000 -e ROOKOUT_TOKEN=$ROOKOUT_TOKEN rookout/tutorial-python
 - Go the the app webpage http://localhost:5000/ and add a todo in order to trigger the rule
 - Check the bottom pane **Messages** and you'll see the dumpframe you just added, as it was triggered by the handler of the web api when you added a todo
 
-Go through the [bug list](https://docs.rookout.com/docs/python-getting-started.html#bug-hunt) and follow instructions to see some basic use cases.
+Go through the [bug list](https://docs.rookout.com/docs/sample-applications.html#bug-hunt) and follow instructions to see some basic use cases.
 
 ## Rules Common Issues
 
