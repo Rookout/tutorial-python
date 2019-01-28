@@ -6,6 +6,13 @@ import json
 from datetime import datetime
 from random import randint
 from todos_store import Store
+import sentry_sdk
+from sentry_sdk.integrations.flask import FlaskIntegration
+
+sentry_sdk.init(
+    dsn="https://2acefaf842814814848afd40457bc55d@sentry.io/1381062",
+    integrations=[FlaskIntegration()]
+)
 
 app = flask.Flask(__name__, static_url_path='/static')
 
