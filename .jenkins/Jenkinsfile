@@ -17,7 +17,7 @@ podCreator.initMain(label: label) {
                 sh("docker build . -t ${dockerTag} && gcloud docker -- push ${dockerTag}")
                 TestUtilities.createTest(this, scriptToUse, jobName, pwd() + "/.jenkins", "Jenkinsfile.test")
                 stage ('Run the tests') {
-                    def packageJsonData = cat pwd() + "/requirements.txt" | grep rook | cut -d '=' -f 2
+                    def rookotVersionInFile = .sh(script: "cat ${pwd()}/requirements.txt" | grep rook | cut -d '=' -f 2", returnStdout: true)
                     triggerer.regression(GIT_BRANCH : "Rooks/Python-v${rookotVersionInFile}"){
                     }
                 }
