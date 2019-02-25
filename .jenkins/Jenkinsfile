@@ -18,6 +18,7 @@ podCreator.initMain(label: label) {
                 TestUtilities.createTest(this, scriptToUse, jobName, pwd() + "/.jenkins", "Jenkinsfile.test")
                 stage ('Run the tests') {
                     def rookoutVersionInFile = sh(script: "cat ${pwd()}/requirements.txt | grep 'rook' | cut -d '=' -f 2", returnStdout: true)
+                    prinln(rookoutVersionInFile)
                     triggerer.regression(GIT_BRANCH : "Rooks/Python-v${rookoutVersionInFile}"){
                     }
                 }
