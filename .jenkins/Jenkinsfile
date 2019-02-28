@@ -20,7 +20,7 @@ podCreator.initMain(label: label) {
                     def rookoutVersionInFile = sh(script: "cat ${pwd()}/requirements.txt | grep 'rook' | cut -d '=' -f 2", returnStdout: true)
                     def cleanRookoutVersionInFile = rookoutVersionInFile.toString().trim()
                     println("Version: ${cleanRookoutVersionInFile}!")
-                    triggerer.regression(GIT_BRANCH : "Rooks/Python-v${cleanRookoutVersionInFile}"){
+                    triggerer.regression(GIT_BRANCH : "Rooks/Python-v${cleanRookoutVersionInFile}", EXTRACT_VERSION_FROM_BRANCH: true ){
                     }
                 }
             }
