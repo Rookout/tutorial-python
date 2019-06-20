@@ -1,3 +1,3 @@
-rook>=0.1.66
+rook>=0.1.67
 flask>=1.0,<=2.0
 sentry-sdk[flask]>=0.6.9
