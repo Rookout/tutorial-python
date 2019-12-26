@@ -105,7 +105,7 @@ Go through the [bug list](https://docs.rookout.com/docs/sample-applications.html
 [version-badge]: https://badge.fury.io/gh/rookout%2Ftutorial-python.svg
 [license-url]: LICENSE
 [docs-url]: https://docs.rookout.com/
-[rookout-getting-started]: https://docs.rookout.com/docs/introduction.html
+[rookout-getting-started]: https://docs.rookout.com/docs/welcome.html
 [rookout-signup]: https://www.rookout.com/trial/
 [docs-image]: https://img.shields.io/badge/docs-latest-blue.svg
 [license-image]: https://img.shields.io/badge/License-Apache%202.0-blue.svg
