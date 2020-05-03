@@ -1,5 +1,11 @@
 FROM python:3.8-slim
 
+ARG GIT_COMMIT=unspecified
+ENV ROOKOUT_COMMIT=$GIT_COMMIT
+
+ARG GIT_ORIGIN=unspecified
+ENV ROOKOUT_REMOTE_ORIGIN=$GIT_ORIGIN
+
 WORKDIR /app
 ADD requirements.txt .
 RUN pip install -r requirements.txt
