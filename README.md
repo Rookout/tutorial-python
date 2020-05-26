@@ -81,7 +81,7 @@ docker run -p 5000:5000 -e ROOKOUT_TOKEN=$ROOKOUT_TOKEN rookout/tutorial-python
     
     
 - Open the file `app.py`
-- Add a Snapshot Breakpoint next to line number 74 by clicking next the the line number in the file viewer
+- Add a Snapshot Breakpoint next to line number 84 by clicking next the the line number in the file viewer
 - Looking at the right-hand pane **Breakpoints**, you will see the Breakpoint you added, on what line you added it and it should be GREEN, meaning everything is communicating correctly.
     - If this is not the case, [click here](https://docs.rookout.com/docs/breakpoints-status.html) to see how to fix that
 - Go the the app webpage http://localhost:5000/ and add a todo in order to trigger the Breakpoint
