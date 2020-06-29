@@ -60,7 +60,7 @@ def index():
 def del_todo(todoId):
     todos = Store.getInstance().todos
     newTodos = [t for t in todos if t['id'] != todoId]
-    todos = newTodos
+    Store.getInstance().todos = newTodos
     return ('', 204)
 
 
