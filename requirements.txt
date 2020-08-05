@@ -1,3 +1,5 @@
 rook>=0.1.113
 flask>=1.0,<=2.0
 sentry-sdk[flask]>=0.6.9
+flask-opentracing
+jaeger-client

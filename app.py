@@ -8,6 +8,8 @@ from random import randint
 from todos_store import Store
 import sentry_sdk
 from sentry_sdk.integrations.flask import FlaskIntegration
+from jaeger_client import Config
+from flask_opentracing import FlaskTracer
 
 sentry_sdk.init(
     dsn="https://2acefaf842814814848afd40457bc55d@sentry.io/1381062",
@@ -121,6 +123,16 @@ def duplicate_todo(todoId):
             break
     return ('', 204)
 
+def initialize_tracer():
+  config = Config(
+      config={
+          'sampler': {'type': 'const', 'param': 1}
+      },
+      service_name='hello-world')
+  return config.initialize_tracer() # also sets opentracing.tracer
+
+
+flask_tracer = FlaskTracer(initialize_tracer, True, app)
 
 import rook
 rook.start()
