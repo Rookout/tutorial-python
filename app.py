@@ -62,14 +62,14 @@ def del_todo(todoId):
     todos = Store.getInstance().todos
     newTodos = [t for t in todos if t['id'] != todoId]
     Store.getInstance().todos = newTodos
-    return ('', 204)
+    return '', 204
 
 
 @app.route('/todos/clear_completed', methods=['DELETE'])
 def clear_completed():
     todos = Store.getInstance().todos
     todo = [t for t in todos if not t['completed']]
-    return ('', 204)
+    return '', 204
 
 
 @app.route('/todos', methods=['UPDATE'])
@@ -82,7 +82,7 @@ def update_todo():
             t['title'] = todo['title']
             t['completed'] = todo['completed']
             break
-    return ('', 204)
+    return '', 204
 
 
 # add a new todo action
@@ -95,14 +95,14 @@ def add_todo():
     req = fr.get_json()
     todoStr = cleanStr(req['title'])
     if not todoStr:
-        return ('', 400)
+        return '', 400
     todo = {
         "title": cleanStr(req['title']),
         "id": unsafeRandId(10),
         "completed": False
     }
     todos.append(todo)
-    return ('', 204)
+    return '', 204
 
 
 @app.route('/todos', methods=['GET'])
@@ -121,7 +121,7 @@ def duplicate_todo(todoId):
                    'completed': todo['title']}
             todos.append(dup)
             break
-    return ('', 204)
+    return '', 204
 
 
 def initialize_tracer():
