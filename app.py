@@ -18,10 +18,9 @@ sentry_sdk.init(
 
 app = flask.Flask(__name__, static_url_path='/static')
 
+
 # unsafeRandId generates a random string composed from english upper case letters and digits
 # it's called unsafe because it doesn't use a crypto random generator
-
-
 def unsafeRandId(len):
     return ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(len))
 
@@ -85,6 +84,7 @@ def update_todo():
             break
     return ('', 204)
 
+
 # add a new todo action
 
 
@@ -123,18 +123,24 @@ def duplicate_todo(todoId):
             break
     return ('', 204)
 
+
 def initialize_tracer():
-  config = Config(
-      config={
-          'sampler': {'type': 'const', 'param': 1}
-      },
-      service_name='hello-world')
-  return config.initialize_tracer() # also sets opentracing.tracer
+    config = Config(
+        config={
+            'sampler': {'type': 'const', 'param': 1},
+            'local_agent': {
+                'reporting_host': 'jaeger-agent',
+                'reporting_port': 5775
+            }
+        },
+        service_name='tutorial-python')
+    return config.initialize_tracer()  # also sets opentracing.tracer
 
 
 flask_tracer = FlaskTracer(initialize_tracer, True, app)
 
 import rook
+
 rook.start()
 
 if __name__ == "__main__":
