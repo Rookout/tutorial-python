@@ -140,7 +140,6 @@ def initialize_tracer():
 flask_tracer = FlaskTracer(initialize_tracer, True, app)
 
 import rook
-
 rook.start()
 
 if __name__ == "__main__":
