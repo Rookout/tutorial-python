@@ -14,7 +14,7 @@ podCreator.initMain(label: label) {
                 def scriptToUse = libraryResource 'generate_tests.groovy'
                 def jobName = "tutorial-python"
                 def dockerTag = TestUtilities.getDockerTagNameForRegression(jobName)
-                if (dockerTag.equals("") {
+                if (dockerTag.equals("")) {
                     def now = new Date()
                     dockerTag = "TAG-" + now.format("yyMMdd.HHmm", TimeZone.getTimeZone('UTC'))
                 }
