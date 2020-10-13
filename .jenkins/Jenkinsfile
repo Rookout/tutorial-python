@@ -18,8 +18,15 @@ podCreator.initMain(label: label) {
                 def scriptToUse = libraryResource 'generate_tests.groovy'
                 def jobName = "tutorial-python"
                 def testType = "regression-test"
+                def dockerTag = TestUtilities.getDockerTagNameForRegression(jobName)
                 def dockerTag = getDockerTagNameForRegression(testType, jobName)
-                sh('docker build . -t ${dockerTag} --build-arg GIT_COMMIT=$(git rev-parse HEAD) --build-arg GIT_ORIGIN=$(git config --get remote.origin.url) && gcloud docker -- push ${dockerTag}')
+                println("Here we go!")
+                println("dockerTag: ${dockerTag}!")
+                println("git rev-parse HEAD: $(git rev-parse HEAD)!")
+                println("git config --get remote.origin.url: $(git config --get remote.origin.url)!")
+                sh('docker build . -t ${dockerTag} --build-arg GIT_COMMIT=$(git rev-parse HEAD) --build-arg GIT_ORIGIN=$(git config --get remote.origin.url)')
+                println("pushing to gcloud!")
+                sh('gcloud docker -- push ${dockerTag}')
                 TestUtilities.createTest(this, scriptToUse, jobName, pwd() + "/.jenkins", "Jenkinsfile.test")
                 stage ('Run the tests') {
                     def rookoutVersionInFile = sh(script: "cat ${pwd()}/requirements.txt | grep 'rook' | cut -d '=' -f 2", returnStdout: true)
