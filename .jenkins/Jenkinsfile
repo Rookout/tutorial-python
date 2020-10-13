@@ -3,6 +3,10 @@ import org.rookout.testsUtil.TestUtilities
 
 def label = "worker-${UUID.randomUUID().toString()}"
 
+static def getDockerTagNameForRegression(testType, jobName) {
+    return "us.gcr.io/rookout/${testType}-${jobName}:latest"
+}
+
 podCreator.initMain(label: label) {
     node(label) {
         print(pwd())
@@ -14,7 +18,7 @@ podCreator.initMain(label: label) {
                 def scriptToUse = libraryResource 'generate_tests.groovy'
                 def jobName = "tutorial-python"
                 def testType = "regression-test"
-                def dockerTag = TestUtilities.getDockerTagNameForRegression(testType, jobName)
+                def dockerTag = getDockerTagNameForRegression(testType, jobName)
                 sh('docker build . -t ${dockerTag} --build-arg GIT_COMMIT=$(git rev-parse HEAD) --build-arg GIT_ORIGIN=$(git config --get remote.origin.url) && gcloud docker -- push ${dockerTag}')
                 TestUtilities.createTest(this, scriptToUse, jobName, pwd() + "/.jenkins", "Jenkinsfile.test")
                 stage ('Run the tests') {
