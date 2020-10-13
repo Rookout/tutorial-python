@@ -22,7 +22,7 @@ podCreator.initMain(label: label) {
                 def dockerTag = getDockerTagNameForRegression(testType, jobName)
                 println("Here we go!")
                 println("dockerTag: ${dockerTag}!")
-                println("git rev-parse HEAD: $(git rev-parse HEAD)!")
+                println('git rev-parse HEAD: $(git rev-parse HEAD)!')
                 println("git config --get remote.origin.url: $(git config --get remote.origin.url)!")
                 sh('docker build . -t ${dockerTag} --build-arg GIT_COMMIT=$(git rev-parse HEAD) --build-arg GIT_ORIGIN=$(git config --get remote.origin.url)')
                 println("pushing to gcloud!")
