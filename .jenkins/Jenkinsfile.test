@@ -1,7 +1,7 @@
 regressionTest {
     FILE_PATH =  "app.py"
     LINE_NUM =  "110"
-    SHA =  "b69efbc8269d9363506cdff7ba291e68fb7893f646843fbce57519e0b54892cd"
+    SHA =  "30e15911e93bd5e14dbc5bf48c386f6a32ce8599f617b691daeebbc3cc10deda"
     LANG = "Python"
     BACKGROUND_IMAGE_CMD = "python /app/app.py &"
     URL_FOR_TRIGGER = "http://localhost:5000/todos"
