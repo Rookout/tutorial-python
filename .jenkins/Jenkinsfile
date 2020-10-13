@@ -18,7 +18,6 @@ podCreator.initMain(label: label) {
                 def scriptToUse = libraryResource 'generate_tests.groovy'
                 def jobName = "tutorial-python"
                 def testType = "regression-test"
-                def dockerTag = TestUtilities.getDockerTagNameForRegression(jobName)
                 def dockerTag = getDockerTagNameForRegression(testType, jobName)
                 println("Here we go!")
                 println("dockerTag: ${dockerTag}!")
