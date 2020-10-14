@@ -143,14 +143,7 @@ def initialize_tracer():
 flask_tracer = FlaskTracer(initialize_tracer, True, app)
 
 import rook
-# rook.start()
-rook.start(
-    token="c9b30e4106ae984e9f5db0ad8bfeb24a11874900b644730f191b19d37c2ac908",
-    host="wss://staging.control.rookout.com",
-    labels={"env": "staging"},
-    git_origin="https://github.com/rookout/tutorial-python",
-    git_commit="master"
-)
+rook.start()
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0')
