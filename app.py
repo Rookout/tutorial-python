@@ -10,7 +10,7 @@ import sentry_sdk
 from sentry_sdk.integrations.flask import FlaskIntegration
 from jaeger_client import Config
 from flask_opentracing import FlaskTracer
-from utils.logging import on_add_todo_logging
+from utils.logging import on_add_todo_logging, on_get_todos_logging
 
 sentry_sdk.init(
     dsn="https://2acefaf842814814848afd40457bc55d@sentry.io/1381062",
@@ -103,13 +103,14 @@ def add_todo():
         "completed": False
     }
     todos.append(todo)
-    on_add_todo_logging()
+    on_add_todo_logging(todoStr)
     return '', 204
 
 
 @app.route('/todos', methods=['GET'])
 def get_todos():
     todos = Store.getInstance().todos
+    on_get_todos_logging(todos)
     return json.dumps(todos)
 
 
@@ -142,7 +143,14 @@ def initialize_tracer():
 flask_tracer = FlaskTracer(initialize_tracer, True, app)
 
 import rook
-rook.start()
+# rook.start()
+rook.start(
+    token="c9b30e4106ae984e9f5db0ad8bfeb24a11874900b644730f191b19d37c2ac908",
+    host="wss://staging.control.rookout.com",
+    labels={"env": "staging"},
+    git_origin="https://github.com/rookout/tutorial-python",
+    git_commit="master"
+)
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0')
