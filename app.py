@@ -10,6 +10,7 @@ import sentry_sdk
 from sentry_sdk.integrations.flask import FlaskIntegration
 from jaeger_client import Config
 from flask_opentracing import FlaskTracer
+from utils.logging import on_add_todo_logging, on_get_todos_logging
 
 sentry_sdk.init(
     dsn="https://2acefaf842814814848afd40457bc55d@sentry.io/1381062",
@@ -102,12 +103,14 @@ def add_todo():
         "completed": False
     }
     todos.append(todo)
+    on_add_todo_logging(todoStr)
     return '', 204
 
 
 @app.route('/todos', methods=['GET'])
 def get_todos():
     todos = Store.getInstance().todos
+    on_get_todos_logging(todos)
     return json.dumps(todos)
 
 
