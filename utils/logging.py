@@ -1,10 +1,12 @@
 import logging
+import flask
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 
 
 def on_add_todo_logging(todoStr):
+    logger.info(flask.request.headers)
     logger.info("Successfully added a new task to do")
     logger.info(f"The user needs to do - {todoStr}")
     logger.debug("add_todo() function works")
@@ -15,6 +17,7 @@ def on_add_todo_logging(todoStr):
 
 
 def on_get_todos_logging(todos):
+    logger.info(flask.request.headers)
     logger.info("fetched the user's todo tasks")
     logger.debug("get_todos() function works")
 
