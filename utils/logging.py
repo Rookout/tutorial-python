@@ -6,19 +6,21 @@ logger.setLevel(logging.INFO)
 
 
 def on_add_todo_logging(todoStr):
-    logger.info(flask.request.headers)
     logger.info("Successfully added a new task to do")
-    logger.info(f"The user needs to do - {todoStr}")
+    for header in flask.request.headers:
+        logger.debug(header)
+    logger.debug(f"The user needs to do - @@@ {todoStr} @@@")
     logger.debug("add_todo() function works")
 
-    if not todoStr.isalnum():
+    if not todoStr.replace(" ", "").isalnum():
         logger.error("The user added a non-alphanumeric character to his task !!!")
         logger.debug("make sure your user is not a robot")
 
 
 def on_get_todos_logging(todos):
-    logger.info(flask.request.headers)
     logger.info("fetched the user's todo tasks")
+    for header in flask.request.headers:
+        logger.debug(header)
     logger.debug("get_todos() function works")
 
     if len(todos) == 0:
