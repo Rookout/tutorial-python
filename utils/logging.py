@@ -7,6 +7,7 @@ logger.setLevel(logging.INFO)
 
 def on_add_todo_logging(todoStr):
     logger.info("Successfully added a new task to do")
+    logger.debug(' ---- request http headers: ----')
     for header in flask.request.headers:
         logger.debug(header)
     logger.debug(f"The user needs to do - @@@@@@@@ {todoStr} @@@@@@@@")
