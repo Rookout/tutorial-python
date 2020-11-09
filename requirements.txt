@@ -1,4 +1,4 @@
-rook>=0.1.122
+rook>=0.1.123
 flask>=1.0,<=2.0
 sentry-sdk[flask]>=0.6.9
 flask-opentracing
