@@ -29,9 +29,15 @@ def unsafeRandId(len):
 def cleanStr(str):
     return re.sub(r'[>|<|;|`|&|/|\\]', '', str)
 
+@app.errorhandler(Exception)
+def handle_exception(e):
+    # pass through and send to Rookout
+    rook.capture_exception(e)
+    return e
 
 @app.errorhandler(404)
 def page_not_found(e):
+    rook.capture_exception(e)
     return '404 Page Not Found'
 
 
@@ -42,14 +48,8 @@ def internal_server_error(e):
 
 @app.route("/error")
 def render_bad_template():
-    try:
-        invalid_oper = 42 / 0
-    except Exception as e:
-        print('Operation failed to complete')
-    animal_list = ['dog', 'cat', 'turtle', 'fish', 'bird', 'cow', 'sealion']
-    time = datetime.now()
-    number = 0.01 * randint(10, 200) + 0.1
-    return flask.render_template('doesnotexist.html', animal_list=animal_list, time=time, number=number)
+    invalid_oper = 42 / 0    
+    return flask.render_template('doesnotexist.html', number=invalid_oper)
 
 
 # redirect from base url to index.html
