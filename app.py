@@ -11,6 +11,8 @@ from sentry_sdk.integrations.flask import FlaskIntegration
 from jaeger_client import Config
 from flask_opentracing import FlaskTracer
 from utils.logging import on_add_todo_logging, on_get_todos_logging
+import os 
+from flask import send_from_directory     
 
 sentry_sdk.init(
     dsn="https://2acefaf842814814848afd40457bc55d@sentry.io/1381062",
@@ -37,7 +39,7 @@ def handle_exception(e):
 
 @app.errorhandler(404)
 def page_not_found(e):
-    rook.capture_exception(e)
+    rook.capture_exception(e)    
     return '404 Page Not Found'
 
 
@@ -68,7 +70,7 @@ def del_todo(todoId):
 
 @app.route('/todos/clear_completed', methods=['DELETE'])
 def clear_completed():
-    todos = Store.getInstance().todos
+    todos = Store.getInstance().all_todos
     todo = [t for t in todos if not t['completed']]
     return '', 204
 
@@ -126,6 +128,9 @@ def duplicate_todo(todoId):
             break
     return '', 204
 
+@app.route('/favicon.ico') 
+def favicon(): 
+    return send_from_directory(os.path.join(app.root_path, 'static'), 'rookout_favicon.ico', mimetype='image/vnd.microsoft.icon')
 
 def initialize_tracer():
     config = Config(
