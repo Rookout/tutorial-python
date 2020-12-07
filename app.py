@@ -151,5 +151,12 @@ import rook
 rook.start()
 
 # test
+import tarfile
+
+with tarfile.open('archive.zip') as tar:
+    #BAD : This could write any file on the filesystem.
+    for entry in tar:
+        tar.extract(entry, "/tmp/unpack/")
+
 if __name__ == "__main__":
     app.run(host='0.0.0.0')
