@@ -158,5 +158,31 @@ with tarfile.open('archive.zip') as tar:
     for entry in tar:
         tar.extract(entry, "/tmp/unpack/")
 
+import os.path
+
+
+urlpatterns = [
+    # Route to user_picture
+    url(r'^user-pic1$', user_picture1, name='user-picture1'),
+    url(r'^user-pic2$', user_picture2, name='user-picture2'),
+    url(r'^user-pic3$', user_picture3, name='user-picture3')
+]
+
+
+def user_picture1(request):
+    """A view that is vulnerable to malicious file access."""
+    filename = request.GET.get('p')
+    # BAD: This could read any file on the file system
+    data = open(filename, 'rb').read()
+    return HttpResponse(data)
+
+def user_picture2(request):
+    """A view that is vulnerable to malicious file access."""
+    base_path = '/server/static/images'
+    filename = request.GET.get('p')
+    # BAD: This could still read any file on the file system
+    data = open(os.path.join(base_path, filename), 'rb').read()
+    return HttpResponse(data)
+
 if __name__ == "__main__":
     app.run(host='0.0.0.0')
