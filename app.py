@@ -184,5 +184,6 @@ def user_picture2(request):
     data = open(os.path.join(base_path, filename), 'rb').read()
     return HttpResponse(data)
 
+#diff
 if __name__ == "__main__":
     app.run(host='0.0.0.0')
