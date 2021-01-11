@@ -31,7 +31,7 @@ spec:
           - name: "ROOKOUT_TOKEN"
             valueFrom:
               secretKeyRef:
-                key: rookout_token
+                key:  rookout_token
                 name: {{ .Release.Name }}-auth
           - name: "COMMIT"
             value: {{ .Values.git_commit }}

@@ -6,7 +6,7 @@ replicaCount: 1
 
 image:
   repository: anaisurlichs/rookout-example
-  pullPolicy: IfNotPresent
+  pullPolicy: Always
 
 imagePullSecrets: []
 nameOverride: ""
@@ -65,8 +65,8 @@ tolerations: []
 
 affinity: {}
 
-rookout_token: ROOKOUT_TOKEN
+rookout_token: ""
 
-origin: ORIGIN
+origin: ""
 
-git_commit: GIT_COMMIT
+git_commit: ""
