@@ -31,12 +31,12 @@ spec:
           - name: "ROOKOUT_TOKEN"
             valueFrom:
               secretKeyRef:
-                key:  ROOKOUT_TOKEN
+                key: rookout_token
                 name: {{ .Release.Name }}-auth
           - name: "COMMIT"
-            value: {{ .Values.COMMIT }}
+            value: {{ .Values.git_commit }}
           - name: "ORIGIN"
-            value: {{ .Values.ORIGIN }}
+            value: {{ .Values.origin }}
           ports:
             - name: http
               containerPort: 5000

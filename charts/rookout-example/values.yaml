@@ -65,8 +65,8 @@ tolerations: []
 
 affinity: {}
 
-ROOKOUT_TOKEN: ROOKOUT_TOKEN
+rookout_token: ROOKOUT_TOKEN
 
-ORIGIN: ORIGIN
+origin: ORIGIN
 
-GIT_COMMIT: GIT_COMMIT
+git_commit: GIT_COMMIT

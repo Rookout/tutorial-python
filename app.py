@@ -153,7 +153,7 @@ import os
 rook.start(rook.start(token=os.environ.get("ROOKOUT_TOKEN"),
                labels={"env":"dev"},
                git_commit=os.environ.get("COMMIT"),
-               git_origin=os.environ.get("ORIGIN")"))
+               git_origin=os.environ.get("ORIGIN")))
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0')
