@@ -1,6 +1,5 @@
-# Rookout tutorial for debugging Python applications
+# Example Using Rookout in combination with Codefresh
 
-[![CircleCI](https://circleci.com/gh/Rookout/tutorial-python/tree/master.svg?style=svg)](https://circleci.com/gh/Rookout/python/tree/master)
 [![License][license-image]][license-url]
 [![Docs][docs-image]][docs-url]
 [![GitHub version][version-badge]](https://badge.fury.io/gh/rookout%2Ftutorial-python)
