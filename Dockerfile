@@ -16,6 +16,8 @@ ADD todos_store.py .
 COPY utils/ ./utils
 ADD static/ ./static
 
+EXPOSE 5000
+
 #ENV FLASK_APP "app.py"
 CMD ["python", "app.py"]
 
