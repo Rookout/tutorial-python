@@ -13,8 +13,8 @@ steps:
     title: Building Docker Image
     type: build
     stage: build
-    registry: dockerhub
-    image_name: 'anaisurlichs/rookout-example'
+    registry: "dockerhub"
+    image_name: '${{REGISTRY_ACCOUNT}}/rookout-example'
     working_directory: "./${{CF_REPO_NAME}}"
     tag: '1.0.0'
     dockerfile: Dockerfile
@@ -28,7 +28,7 @@ steps:
       chart_name: "charts/rookout-example"
       release_name: "${{CF_REPO_NAME}}"
       helm_version: "${{HELM_VERSION}}"
-      kube_context: anais-cluster@codefresh-sa
+      kube_context: "${{K8S_CLUSTER}}"
       namespace: testing
       custom_values:
         - "rookout_token=${{ROOKOUT_TOKEN}}"
