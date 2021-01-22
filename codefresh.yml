@@ -1,0 +1,43 @@
+version: "1.0"
+stages:
+   - clone
+   - build
+   - deploy
+steps:
+  clone:
+    title: cloning repository
+    type: git-clone
+    repo: '${{CF_REPO_OWNER}}/${{CF_REPO_NAME}}'
+    revision: '${{CF_REVISION}}'
+  build_app_image:
+    title: Building Docker Image
+    type: build
+    stage: build
+    registry: dockerhub
+    image_name: 'anaisurlichs/rookout-example'
+    working_directory: "./${{CF_REPO_NAME}}"
+    tag: '1.0.0'
+    dockerfile: Dockerfile
+  launch_composition_step:
+    title: 'Launch full composition with latest images'
+    type: launch-composition
+    composition: temporary-preview-environment
+    fail_fast: false
+    when:
+    branch:
+      only:
+        - codefresh-demo
+  deploy:
+    type: "helm"
+    working_directory: "./${{CF_REPO_NAME}}"
+    stage: "deploy"
+    arguments:
+      action: "install"
+      chart_name: "charts/example-chart"
+      release_name: "${{CF_REPO_NAME}}"
+      helm_version: "${{HELM_VERSION}}"
+      kube_context: "anais-cluster@codefresh-sa"
+    custom_values:
+      - rookout_token='${{ROOKOUT_TOKEN}}'
+      - git_commit='${{CF_BRANCH_TAG_NORMALIZED_LOWER_CASE}}'
+      - origin='${{CF_REPO_NAME}}'
