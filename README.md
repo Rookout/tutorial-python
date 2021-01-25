@@ -1,5 +1,7 @@
 # Example Using Rookout in combination with Codefresh
 
+Have a look at the following tutorial: The link will be inserted here.
+
 [![License][license-image]][license-url]
 [![Docs][docs-image]][docs-url]
 [![GitHub version][version-badge]](https://badge.fury.io/gh/rookout%2Ftutorial-python)

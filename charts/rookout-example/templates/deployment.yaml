@@ -29,9 +29,12 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:          
           - name: "ROOKOUT_TOKEN"
-            value: {{ .Values.rookout_token }}
+            valueFrom:
+              secretKeyRef:
+                key:  rookouttoken
+                name: {{ .Release.Name }}-auth
           - name: "COMMIT"
-            value: {{ .Values.git_commit }}
+            value: {{ .Values.gitcommit }}
           - name: "ORIGIN"
             value: {{ .Values.origin }}
           ports:
