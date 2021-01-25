@@ -5,36 +5,32 @@ stages:
    - deploy
 steps:
   clone:
-    title: Cloning Repository
-    type: git-clone
-    repo: '${{CF_REPO_OWNER}}/${{CF_REPO_NAME}}'
-    revision: '${{CF_REVISION}}'
+      title: Cloning Repository
+      type: git-clone
+      repo: '${{CF_REPO_OWNER}}/${{CF_REPO_NAME}}'
+      revision: '${{CF_REVISION}}'
   build_app_image:
-    title: Building Docker Image
-    type: build
-    stage: build
-    registry: "dockerhub"
-    image_name: '${{REGISTRY_ACCOUNT}}/rookout-example'
-    working_directory: "./${{CF_REPO_NAME}}"
-    tag: '1.0.0'
-    dockerfile: Dockerfile
+      title: Building Docker Image
+      type: build
+      stage: build
+      registry: "dockerhub"
+      image_name: '${{REGISTRY_ACCOUNT}}/rookout-example'
+      working_directory: "./${{CF_REPO_NAME}}"
+      tag: '1.0.0'
+      dockerfile: Dockerfile
   deploy:
-    title: Deploying to Testing
-    type: helm
-    working_directory: "./${{CF_REPO_NAME}}"
-    stage: deploy
-    arguments:
-      action: upgrade
-      chart_name: "charts/rookout-example"
-      release_name: "${{CF_REPO_NAME}}"
-      helm_version: "${{HELM_VERSION}}"
-      kube_context: "${{K8S_CLUSTER}}"
-      namespace: testing
-      custom_values:
-        - "rookout_token=${{ROOKOUT_TOKEN}}"
-        - "git_commit=codefresh-demo"
-        - "origin=tutorial-python"
-    when:
-      branch:
-          only:
-            - codefresh-demo  
+      title: Deploying Helm Chart
+      type: helm
+      stage: deploy
+      working_directory: './${{CF_REPO_NAME}}'
+      arguments:
+        action: install
+        chart_name: charts/rookout-example
+        release_name: my-example-chart
+        helm_version: 3.0.2
+        kube_context: '${{K8S_CLUSTER}}'
+        namespace: testing
+        custom_values:
+          - 'rookouttoken=${{ROOKOUT_TOKEN}}'
+          - 'gitcommit=codefresh-demo'
+          - 'origin=tutorial-python'
