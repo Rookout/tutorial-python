@@ -64,8 +64,8 @@ tolerations: []
 
 affinity: {}
 
-rookout_token: ""
+rookout_token: "your_token"
 
-origin: ""
+origin: "your_repository"
 
-git_commit: ""
+git_commit: "your_branch"
