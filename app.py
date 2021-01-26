@@ -27,9 +27,6 @@ app = flask.Flask(__name__, static_url_path='/static')
 def unsafeRandId(len):
     return ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(len))
 
-def cleanStr(str):
-    return re.sub(r'[>|<|;|`|&|/|\\]', '', str)
-
 @app.errorhandler(Exception)
 def handle_exception(e):
     # pass through and send to Rookout
@@ -95,11 +92,11 @@ def add_todo():
     todos = Store.getInstance().todos
     fr = flask.request
     req = fr.get_json()
-    todoStr = cleanStr(req['title'])
+    todoStr = req['title']
     if not todoStr:
         return '', 400
     todo = {
-        "title": cleanStr(req['title']),
+        "title": req['title'],
         "id": unsafeRandId(10),
         "completed": False
     }
