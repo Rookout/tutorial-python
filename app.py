@@ -27,10 +27,6 @@ app = flask.Flask(__name__, static_url_path='/static')
 def unsafeRandId(len):
     return ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(len))
 
-
-def cleanStr(str):
-    return re.sub(r'[>|<|;|`|&|/|\\]', '', str)
-
 @app.errorhandler(Exception)
 def handle_exception(e):
     # pass through and send to Rookout
@@ -96,7 +92,6 @@ def add_todo():
     todos = Store.getInstance().todos
     fr = flask.request
     req = fr.get_json()
-    todoStr = cleanStr(req['title'])
     if not todoStr:
         return '', 400
     todo = {
@@ -148,7 +143,12 @@ def initialize_tracer():
 flask_tracer = FlaskTracer(initialize_tracer, True, app)
 
 import rook
-rook.start()
+import os
+
+rook.start(token=os.environ.get("ROOKOUT_TOKEN"),
+               labels={"env":"dev"},
+               git_commit=os.environ.get("COMMIT"),
+               git_origin=os.environ.get("ORIGIN"))
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0')
