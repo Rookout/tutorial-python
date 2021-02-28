@@ -19,7 +19,7 @@ A sample app for debugging Python using [Rookout][rookout-getting-started].
 
 ## Prerequisites
 
-1. Python 3.5 or newer
+1. Python 3.5 - 3.8
 2. pip
 3. Optional - Docker - https://www.docker.com/get-docker
 
@@ -81,8 +81,8 @@ docker run -p 5000:5000 -e ROOKOUT_TOKEN=$ROOKOUT_TOKEN rookout/tutorial-python
     
     
 - Open the file `app.py`
-- Add a Snapshot Breakpoint next to line number 84 by clicking next the the line number in the file viewer
-- Looking at the right-hand pane **Breakpoints**, you will see the Breakpoint you added, on what line you added it and it should be GREEN, meaning everything is communicating correctly.
+- Add a Breakpoint next to line number 84 by clicking next the the line number in the file viewer
+- The Breakpoint should turn solid purple, indicating that it has been set successfully and that it is active.
     - If this is not the case, [click here](https://docs.rookout.com/docs/breakpoints-status.html) to see how to fix that
 - Go the the app webpage http://localhost:5000/ and add a todo in order to trigger the Breakpoint
 - Check the bottom pane **Messages** and you'll see the snapshot you just added, as it was triggered by the handler of the web api when you added a todo
@@ -91,8 +91,9 @@ Go through the [bug list](https://docs.rookout.com/docs/sample-applications.html
 
 ## Common Pitfalls
 
-- Breakpoint status is RED -- Hash mismatch. It means the file used in the server is not the same file used from github/local server in app.rookout.com
-- Breakpoint status is GRAY -- No app connected. Make sure you have inserted the Rookout Token in the right place and that connection is made properly.
+- Breakpoint status is pending (hollow with purple outline) -- Connection to the app was not able to be established. Make sure that you inserted the Rookout Token in the right place and that the SDK was properly installed.
+- Breakpoing status is disabled (solid grey) -- The breakpoint was disabled from collecting more data due to the limits being hit.
+- Brekapoint error -- something went wrong. Check the breakpoint status to get more information on the error type, and for more information go to our [breakpoint status guide][https://docs.rookout.com/docs/breakpoints-status/].
 
 ## Want to learn more ?
 
