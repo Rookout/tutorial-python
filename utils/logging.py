@@ -10,7 +10,7 @@ def on_add_todo_logging(todoStr):
     logger.debug(' ---- request http headers: ----')
     for header in flask.request.headers:
         logger.debug(header)
-    logger.debug(f"The user needs to do - @@@@@@@@ {todoStr} @@@@@@@@")
+    logger.debug("The user needs to do - @@@@@@@@ %s @@@@@@@@" % todoStr)
     logger.debug("add_todo() function works")
 
     if not todoStr.replace(" ", "").isalnum():
@@ -28,10 +28,10 @@ def on_get_todos_logging(todos):
     logger.debug(' ---- all todos: ----')
     for todo in todos:
         status = "completed" if todo["completed"] else "uncompleted"
-        logger.debug(f"{todo['title']} --- {status}")
+        logger.debug("%s --- %s" % (todo['title'],status))
 
     if len(todos) == 0:
-        logger.warning("The user have no tasks to do yet")
+        logger.warning("The user has no tasks to do yet")
         logger.debug("Make sure to tell the user he can add todos")
     elif len(todos) > 5:
         logger.critical("The user has more than 5 tasks to do !!!!")
