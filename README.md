@@ -54,7 +54,7 @@ docker run -p 5000:5000 -e ROOKOUT_TOKEN=$ROOKOUT_TOKEN rookout/tutorial-python
 ## Usage
 
 - Log in to the [Rookout IDE](https://app.rookout.com/)
-- Set up your debug session by selecting the NodeJS app you started. See [Debug session setup](https://docs.rookout.com/docs/debug-session-setup) for more information
+- Set up your debug session by selecting the Python app you started. See [Debug session setup](https://docs.rookout.com/docs/debug-session-setup) for more information
 - Add the source code according to the following [instructions](https://docs.rookout.com/docs/source-repos/). In this case, use the [local filesystem option](https://docs.rookout.com/docs/source-repos/) to associate the code in your local 'tutorial-python' folder.
 - Open the file 'app.py'
 - Add a Breakpoint next to line number 84 by clicking next the the line number in the file viewer
