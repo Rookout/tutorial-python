@@ -19,7 +19,7 @@ A sample app for debugging Python using [Rookout][rookout-getting-started].
 
 ## Prerequisites
 
-1. Python 3.5 - 3.8
+1. Python 3.5 - 3.9
 2. pip
 3. Optional - Docker - https://www.docker.com/get-docker
 
