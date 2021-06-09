@@ -145,7 +145,7 @@ def initialize_tracer():
     return config.initialize_tracer()  # also sets opentracing.tracer
 
 
-flask_tracer = FlaskTracer(initialize_tracer, True, app)
+flask_tracer = FlaskTracer(initialize_tracer, True, app, ["remote_addr"])
 
 import rook
 rook.start()
