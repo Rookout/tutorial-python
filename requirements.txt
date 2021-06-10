@@ -1,5 +1,5 @@
 rook>=0.1.146
 flask>=1.0,<=2.0
 sentry-sdk[flask]>=0.6.9
--e git://github.com/Rookout/python-flask.git@25055a45265963bb1d36a4b90c3b94d9388d29a9#egg=Flask_OpenTracing
+-e git://github.com/Rookout/python-flask.git@8cf5c2cc2c390c948bddd1c4b49cfb572e0ee56e#egg=Flask_OpenTracing
 jaeger-client
