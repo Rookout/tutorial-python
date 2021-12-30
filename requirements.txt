@@ -1,4 +1,4 @@
-rook>=0.1.159
+rook>=0.1.160
 flask>=1.0,<=2.0
 sentry-sdk[flask]>=0.6.9
 -e git://github.com/Rookout/python-flask.git@e56318f9c84978ecdaeaaff4aa819dc86f5509c7#egg=Flask_OpenTracing
