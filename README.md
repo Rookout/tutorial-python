@@ -51,6 +51,8 @@ python app.py
 docker run -p 5000:5000 -e ROOKOUT_TOKEN=$ROOKOUT_TOKEN rookout/tutorial-python
 ```
 
+**Note:** On M1-based Macbook laptops, port 5000 is already in use by default, so changing the port binding (`5001:5000` for example) may be required.
+
 ## Usage
 
 - Log in to the [Rookout IDE](https://app.rookout.com/)
