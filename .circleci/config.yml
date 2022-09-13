@@ -53,6 +53,7 @@ references:
   install_yq: &install_yq
     run:
       command: |
+        apt-get update
         apt-get install wget -y
         wget https://github.com/mikefarah/yq/releases/download/v4.27.5/yq_linux_amd64 -O /usr/bin/yq &&\
         chmod +x /usr/bin/yq
