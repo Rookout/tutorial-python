@@ -96,7 +96,7 @@ jobs:
 
   deploy_demo_argo:
     docker:
-      - image: google/cloud-sdk:latest
+      - image: ubuntu:focal
     working_directory: ~/demo
     steps:
       - add_ssh_keys
