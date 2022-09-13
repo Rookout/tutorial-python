@@ -58,7 +58,6 @@ references:
         wget https://github.com/mikefarah/yq/releases/download/v4.27.5/yq_linux_amd64 -O /usr/bin/yq &&\
         chmod +x /usr/bin/yq
 
-
 jobs:
   checkout_code_upver:
     docker:
@@ -106,11 +105,9 @@ jobs:
       - *setup_workspace
       - *load_version
       - *install_deps
-#      - run: git remote remove origin
-#      - run: git remote add origin https://${GITHUB_TOKEN}@github.com:Rookout/gitops-demo
       - run: git config --global user.email "sonario@rookout.com"
       - run: git clone -b staging git@github.com:Rookout/gitops-demo.git
-      - run: PUBLISH_VERSION=$(echo $OLD_VERSION | sed 's/inner-999/1/g') yq -i '.tutorialPython.image.tag = strenv(PUBLISH_VERSION)' gitops-demo/argocd/apps/values.yaml
+      - run: PUBLISH_VERSION=$(echo $NEW_VERSION | sed 's/inner-999/1/g') yq -i '.tutorialPython.image.tag = strenv(PUBLISH_VERSION)' gitops-demo/argocd/apps/values.yaml
       - run: cd gitops-demo && git add argocd/apps/values.yaml
       - run: cd gitops-demo && git commit -m "update tutorial-python $NEW_VERSION"
       - run: cd gitops-demo && git push --set-upstream origin staging
@@ -173,7 +170,8 @@ workflows:
           <<: *filter_master
       - deploy_demo_argo:
           requires:
-            - checkout_code_upver
+            - build_and_push_demo_image
+          <<: *filter_master
       - deploy_demo:
           requires:
             - build_and_push_demo_image
