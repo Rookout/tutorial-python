@@ -105,13 +105,11 @@ jobs:
       - *setup_workspace
       - *load_version
       - *install_yq
-      - run:
-          command: |
-            git clone -b staging git@github.com:Rookout/gitops-demo.git
-            export PUBLISH_VERSION=$(shell echo ${NEW_VERSION} | sed 's/inner-999/1/g')
-            yq '.tutorialPython.image.tag = "${PUBLISH_VERSION}"' gitops-demo/argocd/apps/values.yaml
-            git add gitops-demo/argocd/apps/values.yaml && git commit -m "update tutorial-python ${PUBLISH_VERSION}"
-            git push --set-upstream origin staging
+      - run: git clone -b staging git@github.com:Rookout/gitops-demo.git
+      - run: export PUBLISH_VERSION=$(echo ${NEW_VERSION} | sed 's/inner-999/1/g')
+      - run: yq '.tutorialPython.image.tag = "${PUBLISH_VERSION}"' gitops-demo/argocd/apps/values.yaml
+      - run: git add gitops-demo/argocd/apps/values.yaml && git commit -m "update tutorial-python ${PUBLISH_VERSION}"
+      - run: git push --set-upstream origin staging
 
   deploy_demo:
     docker:
