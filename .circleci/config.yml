@@ -46,6 +46,7 @@ references:
       branches:
         only: master
 
+
   docker_login: &docker_login
     run: docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
 
@@ -168,7 +169,9 @@ workflows:
       - build_and_push_demo_image:
           requires:
             - checkout_code_upver
-          <<: *filter_master
+      - deploy_demo_argo:
+          requires:
+            - build_and_push_demo_image
       - deploy_demo:
           requires:
             - build_and_push_demo_image
