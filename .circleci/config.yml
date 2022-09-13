@@ -110,13 +110,10 @@ jobs:
 #      - run: git remote add origin https://${GITHUB_TOKEN}@github.com:Rookout/gitops-demo
       - run: git config --global user.email "sonario@rookout.com"
       - run: git clone -b staging git@github.com:Rookout/gitops-demo.git
-      - run: yq '.tutorialPython.image.tag' gitops-demo/argocd/apps/values.yaml
       - run: PUBLISH_VERSION=$(echo $OLD_VERSION | sed 's/inner-999/1/g') yq -i '.tutorialPython.image.tag = strenv(PUBLISH_VERSION)' gitops-demo/argocd/apps/values.yaml
-      - run: yq '.tutorialPython.image.tag' gitops-demo/argocd/apps/values.yaml
       - run: cd gitops-demo && git add argocd/apps/values.yaml
-      - run: cd gitops-demo && git status
-#      - run: cd gitops-demo && git commit -m "update tutorial-python $NEW_VERSION"
-#      - run: cd gitops-demo && git push --set-upstream origin staging
+      - run: cd gitops-demo && git commit -m "update tutorial-python $NEW_VERSION"
+      - run: cd gitops-demo && git push --set-upstream origin staging
 
   deploy_demo:
     docker:
