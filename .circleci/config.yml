@@ -106,10 +106,12 @@ jobs:
       - *setup_workspace
       - *load_version
       - *install_deps
+      - run: git remote add origin https://$GITHUB_TOKEN@github.com:Rookout/gitops-demo
       - run: git clone -b staging git@github.com:Rookout/gitops-demo.git
       - run: cat ~/demo/workspace/VERSION
       - run: PUBLISH_VERSION=$(echo $OLD_VERSION | sed 's/inner-999/1/g') yq '.tutorialPython.image.tag = strenv(PUBLISH_VERSION)' gitops-demo/argocd/apps/values.yaml
-      - run: git add gitops-demo/argocd/apps/values.yaml && git commit -m "update tutorial-python $PUBLISH_VERSION"
+      - run: git add gitops-demo/argocd/apps/values.yaml
+      - run: git commit -m "update tutorial-python $NEW_VERSION"
 #      - run: git push --set-upstream origin staging
 
   deploy_demo:
