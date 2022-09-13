@@ -46,9 +46,17 @@ references:
       branches:
         only: master
 
+
   docker_login: &docker_login
     run: docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
 
+  install_deps: &install_deps
+    run:
+      command: |
+        apt-get update
+        apt-get install wget git -y
+        wget https://github.com/mikefarah/yq/releases/download/v4.27.5/yq_linux_amd64 -O /usr/bin/yq &&\
+        chmod +x /usr/bin/yq
 
 jobs:
   checkout_code_upver:
@@ -86,6 +94,24 @@ jobs:
       - run: apt install make -y
       - run: make build-and-upload
 
+  deploy_demo_argo:
+    docker:
+      - image: ubuntu:focal
+    working_directory: ~/demo
+    steps:
+      - add_ssh_keys
+      - *disable_strict_git
+      - *load_cache
+      - *setup_workspace
+      - *load_version
+      - *install_deps
+      - run: git config --global user.email "sonario@rookout.com"
+      - run: git clone -b staging git@github.com:Rookout/gitops-demo.git
+      - run: PUBLISH_VERSION=$(echo $NEW_VERSION | sed 's/inner-999/1/g') yq -i '.tutorialPython.image.tag = strenv(PUBLISH_VERSION)' gitops-demo/argocd/apps/values.yaml
+      - run: cd gitops-demo && git add argocd/apps/values.yaml
+      - run: cd gitops-demo && git commit -m "update tutorial-python $NEW_VERSION"
+      - run: cd gitops-demo && git push --set-upstream origin staging
+
   deploy_demo:
     docker:
       - image: google/cloud-sdk:latest
@@ -103,6 +129,9 @@ jobs:
       - run: export GOOGLE_APPLICATION_CREDENTIALS=/root/demo/gcp-key.json && cd deployment-demo && export env=production && make install-helm deploy-demo
       - run: export GOOGLE_APPLICATION_CREDENTIALS=/root/demo/gcp-key.json && cd deployment-demo && export env=sandbox && make install-helm deploy-demo
       - run: export GOOGLE_APPLICATION_CREDENTIALS=/root/demo/gcp-key.json && cd deployment-demo && export env=staging-sandbox && make install-helm deploy-demo
+
+
+
 
   test_demo_servers_up: 
     docker:
@@ -138,6 +167,10 @@ workflows:
       - build_and_push_demo_image:
           requires:
             - checkout_code_upver
+          <<: *filter_master
+      - deploy_demo_argo:
+          requires:
+            - build_and_push_demo_image
           <<: *filter_master
       - deploy_demo:
           requires:
