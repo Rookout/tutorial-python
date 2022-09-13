@@ -111,7 +111,7 @@ jobs:
       - run: git config --global user.email "sonario@rookout.com"
       - run: git clone -b staging git@github.com:Rookout/gitops-demo.git
       - run: yq '.tutorialPython.image.tag' gitops-demo/argocd/apps/values.yaml
-      - run: PUBLISH_VERSION=$(echo $OLD_VERSION | sed 's/inner-999/1/g') yq '.tutorialPython.image.tag = strenv(PUBLISH_VERSION)' gitops-demo/argocd/apps/values.yaml
+      - run: PUBLISH_VERSION=$(echo $OLD_VERSION | sed 's/inner-999/1/g') yq -i '.tutorialPython.image.tag = strenv(PUBLISH_VERSION)' gitops-demo/argocd/apps/values.yaml
       - run: yq '.tutorialPython.image.tag' gitops-demo/argocd/apps/values.yaml
       - run: cd gitops-demo && git add argocd/apps/values.yaml
       - run: cd gitops-demo && git status
