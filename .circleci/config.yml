@@ -106,6 +106,7 @@ jobs:
       - *setup_workspace
       - *load_version
       - *install_deps
+      - run: git remote remove origin
       - run: git remote add origin https://$GITHUB_TOKEN@github.com:Rookout/gitops-demo
       - run: git clone -b staging git@github.com:Rookout/gitops-demo.git
       - run: cat ~/demo/workspace/VERSION
