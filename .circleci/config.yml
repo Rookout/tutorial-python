@@ -53,10 +53,8 @@ references:
   install_yq: &install_yq
     run:
       command: |
-        apt-key adv --keyserver keyserver.ubuntu.com --recv-keys CC86BB64
-        add-apt-repository ppa:rmescandon/yq
-        apt update
-        apt install yq -y
+        wget https://github.com/mikefarah/yq/releases/download/v4.27.5/yq_linux_amd64 -O /usr/bin/yq &&\
+        chmod +x /usr/bin/yq
 
 
 jobs:
@@ -169,9 +167,8 @@ workflows:
       - build_and_push_demo_image:
           requires:
             - checkout_code_upver
-      - deploy_demo_argo:
-          requires:
-            - build_and_push_demo_image
+          <<: *filter_master
+      - deploy_demo_argo
       - deploy_demo:
           requires:
             - build_and_push_demo_image
