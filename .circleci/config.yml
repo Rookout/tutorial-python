@@ -49,6 +49,14 @@ references:
   docker_login: &docker_login
     run: docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
 
+  install_yq: &install_yq
+    run:
+      command: |
+        apt-key adv --keyserver keyserver.ubuntu.com --recv-keys CC86BB64
+        add-apt-repository ppa:rmescandon/yq
+        apt update
+        apt install yq -y
+
 
 jobs:
   checkout_code_upver:
@@ -86,6 +94,25 @@ jobs:
       - run: apt install make -y
       - run: make build-and-upload
 
+  deploy_demo_argo:
+    docker:
+      - image: google/cloud-sdk:latest
+    working_directory: ~/demo
+    steps:
+      - add_ssh_keys
+      - *disable_strict_git
+      - *load_cache
+      - *setup_workspace
+      - *load_version
+      - *install_yq
+      - run:
+          command: |
+            git clone -b staging git@github.com:Rookout/gitops-demo.git
+            export PUBLISH_VERSION=$(shell echo ${NEW_VERSION} | sed 's/inner-999/1/g')
+            yq '.tutorialPython.image.tag = "${PUBLISH_VERSION}"' gitops-demo/argocd/apps/values.yaml
+            git add gitops-demo/argocd/apps/values.yaml && git commit -m "update tutorial-python ${PUBLISH_VERSION}"
+            git push --set-upstream origin staging
+
   deploy_demo:
     docker:
       - image: google/cloud-sdk:latest
@@ -103,6 +130,9 @@ jobs:
       - run: export GOOGLE_APPLICATION_CREDENTIALS=/root/demo/gcp-key.json && cd deployment-demo && export env=production && make install-helm deploy-demo
       - run: export GOOGLE_APPLICATION_CREDENTIALS=/root/demo/gcp-key.json && cd deployment-demo && export env=sandbox && make install-helm deploy-demo
       - run: export GOOGLE_APPLICATION_CREDENTIALS=/root/demo/gcp-key.json && cd deployment-demo && export env=staging-sandbox && make install-helm deploy-demo
+
+
+
 
   test_demo_servers_up: 
     docker:
