@@ -113,7 +113,7 @@ jobs:
       - run: echo $PUBLISH_VERSION
       - run: echo $OLD_VERSION | sed 's/inner-999/1/g'
       - run: yq '.tutorialPython.image.tag = $PUBLISH_VERSION' gitops-demo/argocd/apps/values.yaml
-#      - run: yq '.tutorialPython.image.tag = $PUBLISH_VERSION' gitops-demo/argocd/apps/values.yaml
+      - run: yq '.tutorialPython.image.tag = $(echo $OLD_VERSION | sed 's/inner-999/1/g')' gitops-demo/argocd/apps/values.yaml
 #      - run: git add gitops-demo/argocd/apps/values.yaml && git commit -m "update tutorial-python ${PUBLISH_VERSION}"
 #      - run: git push --set-upstream origin staging
 
