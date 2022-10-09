@@ -62,6 +62,12 @@ $().ready(() => {
         });
         this.reloadOnFinish(action);
       },
+       removeAll() {
+          const action = $.ajax('/todos/remove_all', {
+              method: 'DELETE'
+          });
+          this.reloadOnFinish(action);
+      },
       updateTodo(todo) {
         const action = $.ajax('/todos', {
           contentType: 'application/json',
