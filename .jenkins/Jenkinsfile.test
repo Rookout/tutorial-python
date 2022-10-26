@@ -1,6 +1,6 @@
 regressionTest {
     FILE_PATH =  "app.py"
-    LINE_NUM =  "118"
+    LINE_NUM =  "114"
     SHA =  "27b674504743b0c2472db804da5e6e7234d8bbd4b274f3c8db2903de1e9e3bd2"
     LANG = "Python"
     BACKGROUND_IMAGE_CMD = "python /app/app.py &"
