@@ -74,10 +74,6 @@ def clear_completed():
     todo = [t for t in todos if not t['completed']]
     return '', 204
 
-@app.route('/todos/remove_all', methods=['DELETE'])
-def remove_all():
-    Store.getInstance().todos = []
-    return '', 204
 
 @app.route('/todos', methods=['UPDATE'])
 def update_todo():
@@ -131,6 +127,13 @@ def duplicate_todo(todoId):
             todos.append(dup)
             break
     return '', 204
+
+
+@app.route('/todos/remove_all', methods=['DELETE'])
+def remove_all():
+    Store.getInstance().todos = []
+    return '', 204
+
 
 @app.route('/favicon.ico') 
 def favicon(): 
