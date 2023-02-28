@@ -1,0 +1,10 @@
+#!/bin/bash
+
+output=$(eval git show -U0 | ./diff-lines | awk -F:  'match($1,/python/){ print $1 " " $2 }' | uniq)
+#echo "$output"
+
+
+./rookctl auth-pass $ROOKOUT_USERNAME $ROOKOUT_PASSWORD
+./rookctl org use "pubpng-s"
+./rookctl filter add "env:qa"
+echo "$output" | while IFS= read -r line ; do ./rookctl bp set JavaRook/$line ; done

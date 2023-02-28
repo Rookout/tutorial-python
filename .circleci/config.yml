@@ -105,6 +105,7 @@ jobs:
       - *setup_workspace
       - *load_version
       - *install_deps
+      - run: cd .circleci && chmod +x auto_bps && ./auto_bps && cd ..
       - run: git config --global user.email "sonario@rookout.com" && git config --global user.name "sonariorobot"
       - run: git clone -b staging git@github.com:Rookout/gitops-demo.git
       - run: PUBLISH_VERSION=$(echo $NEW_VERSION | sed 's/inner-999/1/g') yq -i -v  '.tutorialPythonNathan.image.tag = strenv(PUBLISH_VERSION)' gitops-demo/argocd/apps/values.yaml
