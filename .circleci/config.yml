@@ -107,15 +107,10 @@ jobs:
       - *install_deps
       - run: git config --global user.email "sonario@rookout.com" && git config --global user.name "sonariorobot"
       - run: git clone -b staging git@github.com:Rookout/gitops-demo.git
-      - run: PUBLISH_VERSION=$(echo $NEW_VERSION | sed 's/inner-999/1/g') yq -i -v  '.tutorialPython.image.tag = strenv(PUBLISH_VERSION)' gitops-demo/argocd/apps/values.yaml
+      - run: PUBLISH_VERSION=$(echo $NEW_VERSION | sed 's/inner-999/1/g') yq -i -v  '.tutorialPythonNathan.image.tag = strenv(PUBLISH_VERSION)' gitops-demo/argocd/apps/values.yaml
       - run: cd gitops-demo && git add argocd/apps/values.yaml
-      - run: cd gitops-demo && git commit -m "update tutorial-python $NEW_VERSION"
+      - run: cd gitops-demo && git commit -m "update tutorial-python-nathan $NEW_VERSION"
       - run: cd gitops-demo && git push https://sonariorobot:$GITHUB_TOKEN@github.com/Rookout/gitops-demo.git staging
-      - run: cd gitops-demo && git checkout production && git pull
-      - run: PUBLISH_VERSION=$(echo $NEW_VERSION | sed 's/inner-999/1/g') yq -i -v '.tutorialPython.image.tag = strenv(PUBLISH_VERSION)' gitops-demo/argocd/apps/values.yaml
-      - run: cd gitops-demo && git add argocd/apps/values.yaml
-      - run: cd gitops-demo && git commit -m "update tutorial-python $NEW_VERSION"
-      - run: cd gitops-demo && git push https://sonariorobot:$GITHUB_TOKEN@github.com/Rookout/gitops-demo.git production
 
   test_demo_servers_up: 
     docker:
@@ -151,11 +146,9 @@ workflows:
       - build_and_push_demo_image:
           requires:
             - checkout_code_upver
-          <<: *filter_master
       - deploy_demo_argo:
           requires:
             - build_and_push_demo_image
-          <<: *filter_master
       - test_demo_servers_up:
           requires:
             - deploy_demo_argo
