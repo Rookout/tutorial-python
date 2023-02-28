@@ -1,10 +1,10 @@
 #!/bin/bash
 
-output=$(eval git show -U0 | ./diff-lines | awk -F:  'match($1,/python/){ print $1 " " $2 }' | uniq)
+output=$(eval git show -U0 | ./diff-lines | awk -F:  'match($1,/py/){ print $1 " " $2 }' | uniq)
 #echo "$output"
 
 
 ./rookctl auth-pass $ROOKOUT_USERNAME $ROOKOUT_PASSWORD
-./rookctl org use "pubpng-s"
-./rookctl filter add "env:qa"
-echo "$output" | while IFS= read -r line ; do ./rookctl bp set JavaRook/$line ; done
+./rookctl org use "demo"
+./rookctl filter add "type:saas-nathan"
+echo "$output" | while IFS= read -r line ; do ./rookctl bp set -o rookout -n tutorial-python $line ; done
