@@ -102,7 +102,7 @@ def add_todo():
     todo = {
         "title": cleanStr(req['title']),
         "id": unsafeRandId(10),
-        "completed": True
+        "completed": False
     }
     todos.append(todo)
     on_add_todo_logging(todoStr)
@@ -121,7 +121,7 @@ def duplicate_todo(todoId):
     todos = Store.getInstance().todos
     for todo in todos:
         if todoId == todo['id']:
-            dup = {'title': todo['completed'] + "dup",
+            dup = {'title': todo['completed'],
                    'id': unsafeRandId(10),
                    'completed': todo['title']}
             todos.append(dup)
