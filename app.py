@@ -1,3 +1,5 @@
+import time
+
 import flask
 import re
 import string
@@ -93,6 +95,7 @@ def update_todo():
 
 @app.route('/todos', methods=['POST'])
 def add_todo():
+    time.sleep(1)
     todos = Store.getInstance().todos
     fr = flask.request
     req = fr.get_json()
@@ -102,7 +105,7 @@ def add_todo():
     todo = {
         "title": cleanStr(req['title']),
         "id": unsafeRandId(10),
-        "completed": True
+        "completed": False
     }
     todos.append(todo)
     on_add_todo_logging(todoStr)
