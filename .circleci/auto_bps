@@ -4,7 +4,21 @@ output=$(eval git show -U0 | ./diff-lines | awk -F:  'match($1,/py/){ print $1 "
 #echo "$output"
 
 
-./rookctl auth-pass $ROOKOUT_USERNAME $ROOKOUT_PASSWORD
-./rookctl org use "demo"
-./rookctl filter add "type:saas-nathan"
-echo "$output" | while IFS= read -r line ; do ./rookctl bp set -o rookout -n tutorial-python $line ; done
+
+echo "$output" | while IFS= read -r line; do
+    filename=$(echo "$line" | awk -F' ' '{print $1}')
+    lineno=$(echo "$line" | awk -F' ' '{print $2}')
+
+   curl --location 'https://staging.rookout.com/api/v2/breakpoints/create' \
+    --header 'X-Api-Key: '"$ROOKOUT_API_KEY"'' \
+    --header 'Content-Type: application/json' \
+    --data-raw '{
+    "userEmail": "nathan@rookout.com",
+    "workspaceId": 998277,
+    "filepath": "'"$filename"'",
+    "lineNumber": '"$lineno"',
+    "repositoryURL": "git@github.com:Rookout/tutorial-python.git",
+    "repositoryRevision": "master"
+    }'
+    
+done
