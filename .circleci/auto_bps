@@ -8,6 +8,8 @@ if [ -z "$output"]; then
     exit 0
 fi
 
+repoUrl=$(git remote get-url origin)
+
 echo "$output" | while IFS= read -r line; do
     filename=$(echo "$line" | awk -F' ' '{print $1}')
     lineno=$(echo "$line" | awk -F' ' '{print $2}')
@@ -17,10 +19,9 @@ echo "$output" | while IFS= read -r line; do
   --header 'Content-Type: application/json' \
   --data-raw '{
   "userEmail": "nathan@rookout.com",
-  "workspaceId": 998277,
   "filepath": "'"$filename"'",
   "lineNumber": '"$lineno"',
-  "repositoryURL": "git@github.com:Rookout/tutorial-python.git",
+  "repositoryURL": "'"$repoUrl"'",
   "repositoryRevision": "master"
   }'
 done
