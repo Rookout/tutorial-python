@@ -3,8 +3,6 @@ import re
 import string
 import random
 import json
-from datetime import datetime
-from random import randint
 from todos_store import Store
 import sentry_sdk
 from sentry_sdk.integrations.flask import FlaskIntegration
@@ -90,7 +88,6 @@ def update_todo():
 
 # add a new todo action
 
-
 @app.route('/todos', methods=['POST'])
 def add_todo():
     todos = Store.getInstance().todos
@@ -102,7 +99,7 @@ def add_todo():
     todo = {
         "title": cleanStr(req['title']),
         "id": unsafeRandId(10),
-        "completed": True
+        "completed": False
     }
     todos.append(todo)
     on_add_todo_logging(todoStr)
