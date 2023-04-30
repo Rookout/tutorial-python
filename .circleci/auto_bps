@@ -9,6 +9,7 @@ if [[ -z "$output" ]]; then
 fi
 
 repoUrl=$(git remote get-url origin)
+committerEmail=$(git config --get user.email)
 
 echo "$output" | while IFS= read -r line; do
     filename=$(echo "$line" | awk -F' ' '{print $1}')
@@ -18,7 +19,7 @@ echo "$output" | while IFS= read -r line; do
   --header 'X-Api-Key: '"$ROOKOUT_API_KEY" \
   --header 'Content-Type: application/json' \
   --data-raw '{
-  "userEmail": "nathan@rookout.com",
+  "userEmail": "'"$committerEmail"'",
   "filepath": "'"$filename"'",
   "lineNumber": '"$lineno"',
   "repositoryURL": "'"$repoUrl"'",
