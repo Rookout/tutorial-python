@@ -3,7 +3,10 @@
 output=$(eval git show -U0 | ./diff-lines | awk -F:  'match($1,/py/){ print $1 " " $2 }' | uniq)
 #echo "$output"
 
-
+if [ -z "$output"]; then
+    echo "No diff in this version, Not applying any breakpoints
+    exit 0
+fi
 
 echo "$output" | while IFS= read -r line; do
     filename=$(echo "$line" | awk -F' ' '{print $1}')
