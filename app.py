@@ -97,9 +97,9 @@ def add_todo():
     if not todoStr:
         return '', 400
     todo = {
-        "title": cleanStr(req['title']),
+        "title": cleanStr(req['title'] + "bla"),
         "id": unsafeRandId(10),
-        "completed": True
+        "completed": False
     }
     todos.append(todo)
     on_add_todo_logging(todoStr)
