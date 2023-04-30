@@ -4,7 +4,7 @@ output=$(eval git diff | ./diff-lines2)
 echo "$output"
 
 if [ -z "$output"]; then
-    echo "No diff in this version, Not applying any breakpoints
+    echo "No diff in this version, Not applying any breakpoints"
     exit 0
 fi
 
