@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -ex
 
 output=$(eval git show -U0 | ./diff-lines2)
 echo "$output"
@@ -20,12 +20,11 @@ echo "$output" | while IFS= read -r line; do
   --header 'X-Api-Key: '"$ROOKOUT_API_KEY" \
   --header 'Content-Type: application/json' \
   --data-raw '{
-  "userEmail": "'"$committerEmail"'",
   "filepath": "'"$filename"'",
   "lineNumber": '"$lineno"',
   "repositoryURL": "'"$repoUrl"'",
-  "workspaceProjectPath": "'"$MICROSERVICE_AND_VERSION"'",
-  "projectClientName": "automatic_ci",
+  "workspaceProjectPath": "python-nathan:1.4.4",
+  "workspaceClientName": "automatic_ci",
   "repositoryRevision": "'"$shortRevision"'"
   }'
 done
