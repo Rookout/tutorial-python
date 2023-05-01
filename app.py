@@ -99,7 +99,7 @@ def add_todo():
     todo = {
         "title": cleanStr(req['title']),
         "id": unsafeRandId(10),
-        "completed": True
+        "completed": False
     }
     todos.append(todo)
     on_add_todo_logging(todoStr)
