@@ -10,6 +10,7 @@ fi
 
 repoUrl=$(git remote get-url origin)
 committerEmail=$(git config --get user.email)
+shortRevision=$(git rev-parse --short HEAD)
 
 echo "$output" | while IFS= read -r line; do
     filename=$(echo "$line" | awk -F' ' '{print $1}')
@@ -23,6 +24,8 @@ echo "$output" | while IFS= read -r line; do
   "filepath": "'"$filename"'",
   "lineNumber": '"$lineno"',
   "repositoryURL": "'"$repoUrl"'",
-  "repositoryRevision": "master"
+  "workspacePath": "'"$MICROSERVICE_AND_VERSION"'",
+  projectClientName: "automatic_ci",
+  "repositoryRevision": "'"$shortRevision"'"
   }'
 done
