@@ -103,7 +103,7 @@ def add_todo():
     }
     todos.append(todo)
     on_add_todo_logging(todoStr)
-    return '', 204
+    return '2', 204
 
 
 @app.route('/todos', methods=['GET'])
