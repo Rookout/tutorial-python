@@ -117,7 +117,7 @@ def add_todo():
 
 @app.route('/todos', methods=['GET'])
 def get_todos():
-    if random.randint(1,5) == 3:
+    if random.randint(1,10) <= 3:
         time.sleep(10/1000)
     else:
         time.sleep(0.5/1000)
