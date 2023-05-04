@@ -99,11 +99,11 @@ def add_todo():
     todo = {
         "title": cleanStr(req['title']),
         "id": unsafeRandId(10),
-        "completed": False
+        "completed": True
     }
     todos.append(todo)
     on_add_todo_logging(todoStr)
-    return '2', 204
+    return '1', 204
 
 
 @app.route('/todos', methods=['GET'])
