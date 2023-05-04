@@ -1,3 +1,4 @@
+import time
 import flask
 import re
 import string
@@ -11,8 +12,11 @@ from sentry_sdk.integrations.flask import FlaskIntegration
 from jaeger_client import Config
 from flask_opentracing import FlaskTracer
 from utils.logging import on_add_todo_logging, on_get_todos_logging
-import os 
-from flask import send_from_directory     
+import os
+from flask import send_from_directory
+import rook
+
+rook.start()
 
 sentry_sdk.init(
     dsn="https://2acefaf842814814848afd40457bc55d@sentry.io/1381062",
@@ -31,15 +35,17 @@ def unsafeRandId(len):
 def cleanStr(str):
     return re.sub(r'[>|<|;|`|&|/|\\]', '', str)
 
+
 @app.errorhandler(Exception)
 def handle_exception(e):
     # pass through and send to Rookout
     rook.capture_exception(e)
     return e
 
+
 @app.errorhandler(404)
 def page_not_found(e):
-    rook.capture_exception(e)    
+    rook.capture_exception(e)
     return '404 Page Not Found'
 
 
@@ -50,7 +56,7 @@ def internal_server_error(e):
 
 @app.route("/error")
 def render_bad_template():
-    invalid_oper = 42 / 0    
+    invalid_oper = 42 / 0
     return flask.render_template('doesnotexist.html', number=invalid_oper)
 
 
@@ -111,6 +117,10 @@ def add_todo():
 
 @app.route('/todos', methods=['GET'])
 def get_todos():
+    if random.randint(1,5) == 3:
+        time.sleep(10/1000)
+    else:
+        time.sleep(0.5/1000)
     todos = Store.getInstance().todos
     on_get_todos_logging(todos)
     return json.dumps(todos)
@@ -135,9 +145,11 @@ def remove_all():
     return '', 204
 
 
-@app.route('/favicon.ico') 
-def favicon(): 
-    return send_from_directory(os.path.join(app.root_path, 'static'), 'rookout_favicon.ico', mimetype='image/vnd.microsoft.icon')
+@app.route('/favicon.ico')
+def favicon():
+    return send_from_directory(os.path.join(app.root_path, 'static'), 'rookout_favicon.ico',
+                               mimetype='image/vnd.microsoft.icon')
+
 
 def initialize_tracer():
     config = Config(
@@ -154,8 +166,5 @@ def initialize_tracer():
 
 flask_tracer = FlaskTracer(initialize_tracer, True, app)
 
-import rook
-rook.start()
-
 if __name__ == "__main__":
-    app.run(host='0.0.0.0')
+    app.run(host='0.0.0.0', port=5555)
