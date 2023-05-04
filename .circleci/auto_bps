@@ -20,6 +20,7 @@ echo "$output" | while IFS= read -r line; do
   --header 'Content-Type: application/json' \
   --data-raw '{
   "filepath": "'"$filename"'",
+  "userEmail": "gilad@rookout.com",
   "lineNumber": '"$lineno"',
   "repositoryURL": "'"$repoUrl"'",
   "workspaceProjectPath": "python-nathan:1.4.4",
