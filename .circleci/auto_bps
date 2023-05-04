@@ -9,7 +9,6 @@ if [[ -z "$output" ]]; then
 fi
 
 repoUrl=$(git remote get-url origin)
-committerEmail=$(git config --get user.email)
 shortRevision=$(git rev-parse --short HEAD)
 
 echo "$output" | while IFS= read -r line; do
