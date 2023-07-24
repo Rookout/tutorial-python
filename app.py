@@ -23,6 +23,16 @@ sentry_sdk.init(
 
 app = flask.Flask(__name__, static_url_path='/static')
 
+print("starting... ")
+time.sleep(30)
+counter = 0
+
+for i in range(0, 300):
+    for x in range(0, 5000):
+        counter = counter + 1
+
+    print("sleeping, messages ", counter)
+    time.sleep(5)
 
 # unsafeRandId generates a random string composed from english upper case letters and digits
 # it's called unsafe because it doesn't use a crypto random generator
@@ -95,16 +105,6 @@ def update_todo():
 
 @app.route('/todos', methods=['POST'])
 def add_todo():
-    time.sleep(30)
-    counter = 0
-
-    for i in range(0, 300):
-        for x in range(0, 5000):
-            counter = counter + 1
-
-        print("sleeping, messages ", counter)
-        time.sleep(5)
-
     todos = Store.getInstance().todos
     fr = flask.request
     req = fr.get_json()
