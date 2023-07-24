@@ -23,17 +23,6 @@ sentry_sdk.init(
 
 app = flask.Flask(__name__, static_url_path='/static')
 
-print("starting... ")
-time.sleep(30)
-counter = 0
-
-for i in range(0, 300):
-    for x in range(0, 5000):
-        counter = counter + 1
-
-    print("sleeping, messages ", counter)
-    time.sleep(5)
-
 # unsafeRandId generates a random string composed from english upper case letters and digits
 # it's called unsafe because it doesn't use a crypto random generator
 def unsafeRandId(len):
@@ -168,6 +157,17 @@ flask_tracer = FlaskTracer(initialize_tracer, True, app)
 
 import rook
 rook.start(token="121ecf0c213169e0926abcfb7996fc0d83b367c903cd5d9c08a7a47c9979d212", host="wss://staging.control.rookout.com")
+
+print("starting... ")
+time.sleep(10)
+counter = 0
+
+for i in range(0, 300):
+    for x in range(0, 5000):
+        counter = counter + 1
+
+    print("sleeping, messages ", counter)
+    time.sleep(5)
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0',port=5555)
