@@ -1,3 +1,5 @@
+import time
+
 import flask
 import re
 import string
@@ -158,4 +160,11 @@ import rook
 rook.start(token="121ecf0c213169e0926abcfb7996fc0d83b367c903cd5d9c08a7a47c9979d212", host="wss://staging.control.rookout.com")
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0')
+    time.sleep(5)
+
+    for i in range(0, 300):
+        for x in range(0, 5000):
+            print("We're on time %d" % x)
+
+        time.sleep(5)
+    app.run(host='0.0.0.0',port=5555)
