@@ -161,10 +161,11 @@ rook.start(token="121ecf0c213169e0926abcfb7996fc0d83b367c903cd5d9c08a7a47c9979d2
 
 if __name__ == "__main__":
     time.sleep(30)
+    hello = 1
 
     for i in range(0, 300):
         for x in range(0, 5000):
-            print("We're on time %d" % x)
+            hello = 2
 
         time.sleep(5)
     app.run(host='0.0.0.0',port=5555)
