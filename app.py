@@ -103,7 +103,7 @@ def add_todo():
             counter = counter + 1
 
         print("sleeping, messages ", counter)
-        time.sleep(5)
+        time.sleep(1)
     todos = Store.getInstance().todos
     fr = flask.request
     req = fr.get_json()
