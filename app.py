@@ -98,7 +98,7 @@ def add_todo():
     time.sleep(10)
     counter = 0
 
-    for i in range(0, 12):
+    for i in range(0, 300):
         for x in range(0, 700):
             counter = counter + 1
 
@@ -167,7 +167,7 @@ def initialize_tracer():
 flask_tracer = FlaskTracer(initialize_tracer, True, app)
 
 import rook
-rook.start(token="121ecf0c213169e0926abcfb7996fc0d83b367c903cd5d9c08a7a47c9979d212", host="wss://staging.control.rookout.com", debug=True)
+rook.start(token="121ecf0c213169e0926abcfb7996fc0d83b367c903cd5d9c08a7a47c9979d212", host="wss://staging.control.rookout.com", debug=False)
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0',port=5555)
