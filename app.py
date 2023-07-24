@@ -96,13 +96,15 @@ def update_todo():
 @app.route('/todos', methods=['POST'])
 def add_todo():
     time.sleep(30)
-    hello = 1
+    counter = 0
 
     for i in range(0, 300):
         for x in range(0, 5000):
-            hello = 2
+            counter = counter + 1
 
+        print("sleeping, messages ", counter)
         time.sleep(5)
+
     todos = Store.getInstance().todos
     fr = flask.request
     req = fr.get_json()
