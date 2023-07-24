@@ -140,6 +140,20 @@ def remove_all():
 def favicon(): 
     return send_from_directory(os.path.join(app.root_path, 'static'), 'rookout_favicon.ico', mimetype='image/vnd.microsoft.icon')
 
+
+def runtests():
+    print("starting... ")
+    time.sleep(10)
+    counter = 0
+
+    for i in range(0, 300):
+        for x in range(0, 5000):
+            counter = counter + 1
+
+        print("sleeping, messages ", counter)
+        time.sleep(5)
+
+
 def initialize_tracer():
     config = Config(
         config={
@@ -158,16 +172,6 @@ flask_tracer = FlaskTracer(initialize_tracer, True, app)
 import rook
 rook.start(token="121ecf0c213169e0926abcfb7996fc0d83b367c903cd5d9c08a7a47c9979d212", host="wss://staging.control.rookout.com")
 
-print("starting... ")
-time.sleep(10)
-counter = 0
-
-for i in range(0, 300):
-    for x in range(0, 5000):
-        counter = counter + 1
-
-    print("sleeping, messages ", counter)
-    time.sleep(5)
-
 if __name__ == "__main__":
+    runtests()
     app.run(host='0.0.0.0',port=5555)
