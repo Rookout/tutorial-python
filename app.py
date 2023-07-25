@@ -98,8 +98,8 @@ def add_todo():
     time.sleep(10)
     counter = 0
 
-    for i in range(0, 300):
-        for x in range(0, 700):
+    for i in range(0, 30):
+        for x in range(0, 5000):
             counter = counter + 1
 
         print("sleeping, messages ", counter)
