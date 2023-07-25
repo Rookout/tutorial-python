@@ -99,7 +99,7 @@ def add_todo():
     counter = 0
 
     for i in range(0, 30):
-        for x in range(0, 5000):
+        for x in range(0, 10000):
             counter = counter + 1
 
         print("sleeping, messages ", counter)
