@@ -167,7 +167,12 @@ def initialize_tracer():
 flask_tracer = FlaskTracer(initialize_tracer, True, app)
 
 import rook
-rook.start(token="121ecf0c213169e0926abcfb7996fc0d83b367c903cd5d9c08a7a47c9979d212", host="wss://staging.control.rookout.com", debug=False)
+rook.start(
+    token="4e2a7d3499fb4e3d6d4cf46b3fe6a00fa30d4bef64244afa3cfe602d30c72df8",
+    host="wss://localhost",
+    debug=False,
+    port=7488,
+)
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0',port=5555)
