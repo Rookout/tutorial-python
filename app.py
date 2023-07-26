@@ -169,8 +169,8 @@ flask_tracer = FlaskTracer(initialize_tracer, True, app)
 import rook
 rook.start(
     token="4e2a7d3499fb4e3d6d4cf46b3fe6a00fa30d4bef64244afa3cfe602d30c72df8",
-    host="wss://localhost",
-    debug=False,
+    host="ws://localhost",
+    debug=True,
     port=7488,
 )
 
