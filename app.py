@@ -105,6 +105,8 @@ def add_todo():
         "completed": False
     }
     todos.append(todo)
+    for item in range(5000):
+        print(item)
     on_add_todo_logging(todoStr)
     return '', 204
 
