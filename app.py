@@ -93,6 +93,8 @@ def update_todo():
 
 @app.route('/todos', methods=['POST'])
 def add_todo():
+    for item in range(150):
+        print(item)
     todos = Store.getInstance().todos
     fr = flask.request
     req = fr.get_json()
@@ -105,7 +107,7 @@ def add_todo():
         "completed": False
     }
     todos.append(todo)
-    for item in range(5000):
+    for item in range(150):
         print(item)
     on_add_todo_logging(todoStr)
     return '', 204
@@ -137,8 +139,8 @@ def remove_all():
     return '', 204
 
 
-@app.route('/favicon.ico') 
-def favicon(): 
+@app.route('/favicon.ico')
+def favicon():
     return send_from_directory(os.path.join(app.root_path, 'static'), 'rookout_favicon.ico', mimetype='image/vnd.microsoft.icon')
 
 def initialize_tracer():
@@ -157,7 +159,9 @@ def initialize_tracer():
 flask_tracer = FlaskTracer(initialize_tracer, True, app)
 
 import rook
-rook.start()
+rook.start(
+    debug=True,
+)
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0')
+    app.run(host='0.0.0.0', port=5052)
