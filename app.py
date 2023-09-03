@@ -93,7 +93,7 @@ def update_todo():
 
 @app.route('/todos', methods=['POST'])
 def add_todo():
-    for item in range(150):
+    for item in range(1000):
         print(item)
     todos = Store.getInstance().todos
     fr = flask.request
@@ -107,7 +107,7 @@ def add_todo():
         "completed": False
     }
     todos.append(todo)
-    for item in range(150):
+    for item in range(1000):
         print(item)
     on_add_todo_logging(todoStr)
     return '', 204
