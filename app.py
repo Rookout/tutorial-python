@@ -6,18 +6,18 @@ import json
 from datetime import datetime
 from random import randint
 from todos_store import Store
-import sentry_sdk
-from sentry_sdk.integrations.flask import FlaskIntegration
+
+
 from jaeger_client import Config
 from flask_opentracing import FlaskTracer
 from utils.logging import on_add_todo_logging, on_get_todos_logging
 import os 
 from flask import send_from_directory     
 
-sentry_sdk.init(
-    dsn="https://2acefaf842814814848afd40457bc55d@sentry.io/1381062",
-    integrations=[FlaskIntegration()]
-)
+
+
+
+
 
 app = flask.Flask(__name__, static_url_path='/static')
 
