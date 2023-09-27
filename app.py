@@ -6,11 +6,18 @@ import json
 from datetime import datetime
 from random import randint
 from todos_store import Store
+import sentry_sdk
+
 from jaeger_client import Config
 from flask_opentracing import FlaskTracer
 from utils.logging import on_add_todo_logging, on_get_todos_logging
 import os 
 from flask import send_from_directory     
+
+
+
+
+
 
 app = flask.Flask(__name__, static_url_path='/static')
 
