@@ -6,7 +6,7 @@ import json
 from datetime import datetime
 from random import randint
 from todos_store import Store
-import sentry_sdk
+
 
 from jaeger_client import Config
 from flask_opentracing import FlaskTracer
