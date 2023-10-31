@@ -3,3 +3,4 @@ flask>=1.0,<=2.0
 -e git+https://github.com/Rookout/python-flask.git@e56318f9c84978ecdaeaaff4aa819dc86f5509c7#egg=Flask_OpenTracing
 jaeger-client
 protobuf>=3.18.3 # not directly required, pinned by Snyk to avoid a vulnerability
+werkzeug==3.0.1
