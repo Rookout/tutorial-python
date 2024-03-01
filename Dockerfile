@@ -1,4 +1,4 @@
-FROM python:3.8-slim
+FROM python:3.13.0a4-slim
 
 # pip installing the requirements.txt requires git because we're installing a fork
 RUN apt-get -y update
